@@ -1,10 +1,10 @@
-# Microsoft Sentinel | Deployment Automation
+# Secon Cyber | Microsoft Sentinel | Deployment Automation
 
 Microsoft Sentinel All-in-One is a project that seeks to speed up deployment and initial configuration tasks of an Microsoft Sentinel environments. This is ideal for Proof of Concept scenarios and customer onboarding in MSSP scenarios.
 
 ## What does it do?
 
-Microsoft Sentinel | Deployment Automation automates the following tasks:
+Secon Cyber | Microsoft Sentinel | Deployment Automation automates the following tasks:
 
 - Creates resource group
 - Creates Log Analytics workspace 
@@ -38,27 +38,11 @@ It takes around **10 minutes** to deploy if enabling analytics rules is selected
 
 ## Deployment
 
-There are two versions of Microsoft Sentinel All-in-One:
-
-| All-In-One version                                 | Deploy       | Permissions |
-| -------------------------------------------------- | ------------ | -------- |
-| Subscription scope                                 | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDiChipi%2Fall-in-one%2Fmain%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDiChipi%2Fall-in-one%2Fmain%2FcreateUiDefinition.json)   | Microsoft Sentinel Contributor as a minimum |
+Microsoft Sentinel - Deployment Automation:
 
 | All-In-One Version       | Deploy | Permissions Required |
 |--------------------------|--------|-----------------------|
 | **Subscription scope**   | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2F3e2ad3ef962b54caed5ad8cdc6c677819076ed93%2FAzure%2520Sentinel%2520V2%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2F3e2ad3ef962b54caed5ad8cdc6c677819076ed93%2FAzure%2520Sentinel%2520V2%2FcreateUiDefinition.json) | **Microsoft Sentinel Contributor** (minimum) |
-
-
-## Lighthouse Offers
-
-| Azure Lighthouse + Azure AD PIM                    |  Deploy      | Templates   | Permissions |
-| -------------------------------------------------- | ------------ | ----------- | ----------- |
-| Subscription scope                                 | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Lighthouse-samples%2Fmaster%2Ftemplates%2Fdelegated-resource-management-eligible-authorizations%2Fsubscription%2Fsubscription.json) | [templates](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/delegated-resource-management-eligible-authorizations/subscription) | Owner, RBAC Administrator, User Access Administrator
-
-| Azure Lighthouse + Azure AD PIM                    |  Deploy      | Templates   | Permissions |
-| -------------------------------------------------- | ------------ | ----------- | ----------- |
-| Resource group scope                               | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Lighthouse-samples%2Fmaster%2Ftemplates%2Fdelegated-resource-management-eligible-authorizations%2Frg%2Frg.json) | [templates](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/delegated-resource-management-eligible-authorizations/rg) | Owner, RBAC Administrator, User Access Administrator
-
 
 ## Supported connectors
 

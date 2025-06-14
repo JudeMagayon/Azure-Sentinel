@@ -1,10 +1,10 @@
-# Microsoft Sentinel All-in-One
+# Microsoft Sentinel | Deployment Automation
 
 Microsoft Sentinel All-in-One is a project that seeks to speed up deployment and initial configuration tasks of an Microsoft Sentinel environments. This is ideal for Proof of Concept scenarios and customer onboarding in MSSP scenarios.
 
 ## What does it do?
 
-Microsoft Sentinel All-In-One automates the following tasks:
+Microsoft Sentinel | Deployment Automation automates the following tasks:
 
 - Creates resource group
 - Creates Log Analytics workspace 

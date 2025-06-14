@@ -44,12 +44,15 @@ There are two versions of Microsoft Sentinel All-in-One:
 | -------------------------------------------------- | ------------ | -------- |
 | Subscription scope                                 | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDiChipi%2Fall-in-one%2Fmain%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDiChipi%2Fall-in-one%2Fmain%2FcreateUiDefinition.json)   | Microsoft Sentinel Contributor as a minimum |
 
+| All-In-One Version       | Deploy | Permissions Required |
+|--------------------------|--------|-----------------------|
+| **Subscription scope**   | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2F0910325e059ebc3e9fa9ee081951669665c1f57b%2FAzure%2520Sentinel%2520V2%2Fazuredeploy.json) | **Microsoft Sentinel Contributor** (minimum) |
+
 ## Lighthouse Offers
 
 | Azure Lighthouse + Azure AD PIM                    |  Deploy      | Templates   | Permissions |
 | -------------------------------------------------- | ------------ | ----------- | ----------- |
 | Subscription scope                                 | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2FAzure-Lighthouse-samples%2Fmaster%2Ftemplates%2Fdelegated-resource-management-eligible-authorizations%2Fsubscription%2Fsubscription.json) | [templates](https://github.com/Azure/Azure-Lighthouse-samples/tree/master/templates/delegated-resource-management-eligible-authorizations/subscription) | Owner, RBAC Administrator, User Access Administrator
-
 
 | Azure Lighthouse + Azure AD PIM                    |  Deploy      | Templates   | Permissions |
 | -------------------------------------------------- | ------------ | ----------- | ----------- |

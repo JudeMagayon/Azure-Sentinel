@@ -1,10 +1,13 @@
+
+![Secon-white-logo-green-1-768x149](https://github.com/user-attachments/assets/a66347b8-c453-4cac-b7f3-fe71a9c5d839)
+
 # Secon Cyber | Microsoft Sentinel | Deployment Automation
 
 This project automates the deployment and initial configuration of Microsoft Sentinel environments. It is ideal for **Proof of Concept (PoC)**, **customer onboarding**, or **MSSP-managed SOC** scenarios.
 
 ---
 
-## 🚀 What This Automation Does
+## What This Automation Does
 
 - Creates a **Resource Group**
 - Deploys a **Log Analytics Workspace**
@@ -42,7 +45,7 @@ This project automates the deployment and initial configuration of Microsoft Sen
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 - An **Azure Subscription**
 - **Microsoft Sentinel Contributor** role (minimum)
@@ -58,7 +61,7 @@ This project automates the deployment and initial configuration of Microsoft Sen
 
 ---
 
-## 🔌 Supported Data Connectors
+## Supported Data Connectors
 
 | Data Connector                             | License            | Required Permissions            | Ingestion Cost |
 |--------------------------------------------|--------------------|----------------------------------|----------------|

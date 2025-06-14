@@ -148,7 +148,7 @@
             "metadata": {
                 "description": "The location of resources"
             },
-            "defaultValue": "https://raw.githubusercontent.com/DiChipi/all-in-one/main/"
+            "defaultValue": "https://github.com/JudeMagayon/Azure-Sentinel/tree/c0c069cd2216ad03d0968001c2753077e3f2b7c6/Azure%20Sentinel%20V2"
         }
     },
     "variables": {

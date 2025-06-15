@@ -1,75 +1,185 @@
-# Microsoft Sentinel - Auto-Close Noisy Incidents
+![Secon-white-logo-green-1-768x149](https://github.com/user-attachments/assets/a66347b8-c453-4cac-b7f3-fe71a9c5d839)
 
-This template deploys a Microsoft Sentinel workspace with an automation rule that automatically closes noisy MFA denial incidents to reduce alert fatigue.
+# Secon Cyber | Microsoft Sentinel | Deployment Automation
 
-## Quick Deploy
+This project automates the deployment and initial configuration of Microsoft Sentinel environments. It is ideal for **Proof of Concept (PoC)**, **customer onboarding**, or **MSSP-managed SOC** scenarios.
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2Fmain%2FAzure%2520Sentinel%2520V2%2Fautomationrule.json)
+---
 
-[![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2Fmain%2FAzure%2520Sentinel%2520V2%2Fautomationrule.json)
+## What This Automation Does
 
-## What gets deployed
+- Creates a **Resource Group**
+- Deploys a **Log Analytics Workspace**
+- Installs **Microsoft Sentinel** on the workspace
+- Configures:
+  - **Log retention**
+  - [**Daily cap**](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/daily-cap)
+  - **Commitment tiers**
+- Enables **UEBA** (User & Entity Behavior Analytics) with Azure AD and/or on-prem AD
+- Enables **health diagnostics** for:
+  - Analytics Rules
+  - Data Connectors
+  - Automation Rules
+- Deploys **Content Hub solutions**
+- Enables the following **Data Connectors**:
+  - Azure Active Directory *(tenant-scope only)*
+  - Azure AD Identity Protection
+  - Azure Activity
+  - Dynamics 365
+  - Microsoft 365 Defender
+  - Microsoft Defender for Cloud
+  - Microsoft Insider Risk Management
+  - Microsoft Power BI
+  - Microsoft Project
+  - Office 365
+  - Threat Intelligence Platforms
+- Deploys **Scheduled and Near-Real-Time analytics rules** from:
+  - Enabled Content Hub solutions
+  - Selected Data Connectors
+- Includes Automation Rule to **auto-close noisy incidents** (e.g., MFA Deny)
 
-- **Log Analytics Workspace** - Foundation for Microsoft Sentinel
-- **Automation Rule** - Auto-closes incidents containing "MFA Deny" in the title
-- **Content Hub Solution** - Windows Security Events solution package
-- **Alert Rule** - MFA Deny alert rule (initially disabled)
+⏱ **Estimated Time to Deploy**:
+- With analytics rules: ~10 minutes  
+- Without analytics rules: ~2 minutes
 
-## Parameters
-
-| Parameter | Description | Default Value |
-|-----------|-------------|---------------|
-| `workspaceName` | Name for the Sentinel workspace | *Required* |
-| `location` | Azure region for deployment | `southeastasia` |
-| `automationRuleName` | Name for the automation rule | `AutoCloseNoisyIncidents` |
-| `contentHubSolutionName` | Content Hub solution to install | `WindowsSecurityEvents` |
+---
 
 ## Prerequisites
 
-- Azure subscription with appropriate permissions
-- Microsoft Sentinel licensing
-- Resource group for deployment
+- An **Azure Subscription**
+- **Microsoft Sentinel Contributor** role (minimum)
+- Some data connectors require specific licenses (see table below)
 
-## Post-Deployment
+---
 
-1. **Review the automation rule** - Verify the conditions match your requirements
-2. **Enable MFA alert rule** - Configure and enable the MFA Deny alert rule as needed
-3. **Monitor incidents** - Watch for properly auto-closed incidents
-4. **Adjust conditions** - Modify the automation rule if needed based on your environment
+## 🔧 Deployment Options
+
+### Full Microsoft Sentinel Environment
+
+Deploy a complete Microsoft Sentinel environment with all components:
+
+| Deployment Scope       | Deploy | Required Permission |
+|------------------------|--------|---------------------|
+| **Subscription Scope** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2F3e2ad3ef962b54caed5ad8cdc6c677819076ed93%2FAzure%2520Sentinel%2520V2%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2F3e2ad3ef962b54caed5ad8cdc6c677819076ed93%2FAzure%2520Sentinel%2520V2%2FcreateUiDefinition.json) | Microsoft Sentinel Contributor |
+
+### Standalone Automation Rule
+
+Deploy only the automation rule for auto-closing noisy incidents (ideal for existing Sentinel workspaces):
+
+| Component | Deploy | Description |
+|-----------|--------|-------------|
+| **Automation Rule** | [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2Fmain%2FAzure%2520Sentinel%2520V2%2Fautomationrule.json) | Auto-closes incidents containing "MFA Deny" in title |
+
+#### Automation Rule Features
+- **Trigger**: Activates when new incidents are created
+- **Condition**: Targets incidents with "MFA Deny" in the title
+- **Action**: Automatically closes incidents as "Benign Positive"
+- **Benefit**: Reduces alert fatigue from common false positives
+
+#### Automation Rule Parameters
+| Parameter | Description | Default Value |
+|-----------|-------------|---------------|
+| `workspaceName` | Name of existing Sentinel workspace | *Required* |
+| `location` | Azure region | `southeastasia` |
+| `automationRuleName` | Name for the automation rule | `AutoCloseNoisyIncidents` |
+
+---
 
 ## Manual Deployment
 
-### Using Azure CLI
-
+### Full Environment - Azure CLI
 ```bash
 # Create resource group
-az group create --name "rg-sentinel-automation" --location "southeastasia"
+az group create --name "rg-sentinel-poc" --location "southeastasia"
 
-# Deploy template
+# Deploy full environment
 az deployment group create \
-  --resource-group "rg-sentinel-automation" \
+  --resource-group "rg-sentinel-poc" \
+  --template-file "Azure Sentinel V2/azuredeploy.json" \
+  --parameters @"Azure Sentinel V2/azuredeploy.parameters.json"
+```
+
+### Automation Rule Only - Azure CLI
+```bash
+# Deploy automation rule to existing workspace
+az deployment group create \
+  --resource-group "your-existing-rg" \
   --template-file "Azure Sentinel V2/automationrule.json" \
   --parameters workspaceName="your-workspace-name"
 ```
 
-### Using PowerShell
-
+### PowerShell Deployment
 ```powershell
-# Create resource group
-New-AzResourceGroup -Name "rg-sentinel-automation" -Location "Southeast Asia"
-
-# Deploy template
+# Full environment
 New-AzResourceGroupDeployment `
-  -ResourceGroupName "rg-sentinel-automation" `
+  -ResourceGroupName "rg-sentinel-poc" `
+  -TemplateFile "Azure Sentinel V2/azuredeploy.json" `
+  -TemplateParameterFile "Azure Sentinel V2/azuredeploy.parameters.json"
+
+# Automation rule only
+New-AzResourceGroupDeployment `
+  -ResourceGroupName "your-existing-rg" `
   -TemplateFile "Azure Sentinel V2/automationrule.json" `
   -workspaceName "your-workspace-name"
 ```
 
-## Customization
+---
+
+## Supported Data Connectors
+
+| Data Connector                             | License            | Required Permissions            | Ingestion Cost |
+|--------------------------------------------|--------------------|----------------------------------|----------------|
+| Azure Active Directory *(tenant only)*     | Any AAD license    | Global Admin / Security Admin   | **Billed**     |
+| Azure AD Identity Protection               | AAD Premium P2     | Global Admin / Security Admin   | **Free**       |
+| Azure Activity                             | None               | Subscription Reader             | **Free**       |
+| Dynamics 365                               | D365 License       | Global Admin / Security Admin   | **Billed**     |
+| Microsoft 365 Defender                     | M365D License      | Global Admin / Security Admin   | **Free**       |
+| Microsoft Defender for Cloud               | MDC License        | Security Reader                 | **Free**       |
+| Insider Risk Management                    | IRM License        | Global Admin / Security Admin   | **Free**       |
+| Microsoft Power BI                         | Power BI License   | Global Admin / Security Admin   | **Billed**     |
+| Microsoft Project                          | Project License    | Global Admin / Security Admin   | **Billed**     |
+| Office 365                                 | None               | Global Admin / Security Admin   | **Free**       |
+| Threat Intelligence Platforms              | None               | Global Admin / Security Admin   | **Billed**     |
+
+---
+
+## 🎯 Use Cases
+
+### Full Deployment
+- **New Sentinel implementations**
+- **PoC environments**
+- **Customer onboarding**
+- **MSSP managed SOC setup**
+
+### Automation Rule Only
+- **Existing Sentinel workspaces** with noise issues
+- **Quick wins** for alert fatigue reduction
+- **Incident management optimization**
+- **Testing automated response workflows**
+
+---
+
+## ⚠️ Important Notes
+
+### Security Considerations
+- **Test first**: Deploy automation rules in non-production environments initially
+- **Monitor closely**: Review auto-closed incidents to ensure no false positives
+- **Customize conditions**: Adjust automation rule conditions based on your environment
+- **Audit trail**: All automated actions are logged for compliance
+
+### Cost Management
+- Review data connector costs before enabling
+- Configure daily caps to control ingestion costs
+- Monitor workspace usage regularly
+- Consider commitment tiers for predictable costs
+
+---
+
+## 🔧 Customization
 
 ### Modify Automation Rule Conditions
 
-To change what incidents get auto-closed, edit the `conditions` array in the template:
+To customize what incidents get auto-closed, edit the automation rule template:
 
 ```json
 "conditions": [
@@ -77,18 +187,6 @@ To change what incidents get auto-closed, edit the `conditions` array in the tem
     "property": "Incident.Title",
     "operator": "Contains",
     "value": "Your Custom Text"
-  }
-]
-```
-
-### Add Multiple Conditions
-
-```json
-"conditions": [
-  {
-    "property": "Incident.Title",
-    "operator": "Contains",
-    "value": "MFA Deny"
   },
   {
     "property": "Incident.Severity",
@@ -98,33 +196,40 @@ To change what incidents get auto-closed, edit the `conditions` array in the tem
 ]
 ```
 
-## Security Considerations
+### Common Automation Rule Patterns
 
-⚠️ **Important**: This automation rule will automatically close incidents. Ensure you:
-
-- Test in a non-production environment first
-- Review the incident conditions carefully
-- Monitor for false positives
-- Have proper logging and alerting for closed incidents
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test the deployment
-5. Submit a pull request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-For issues and questions:
-- Create an [issue](https://github.com/JudeMagayon/Azure-Sentinel/issues)
-- Check Azure Sentinel [documentation](https://docs.microsoft.com/en-us/azure/sentinel/)
+1. **MFA Denials**: `"Contains"` + `"MFA Deny"`
+2. **Low Severity**: `"Equals"` + `"Low"`
+3. **Specific Sources**: `"Contains"` + `"SourceSystem"`
+4. **Time-based**: Add scheduling logic for business hours
 
 ---
 
-**Note**: This template is located in the `Azure Sentinel V2` folder of the repository.
+## 📚 Additional Resources
+
+- [Microsoft Sentinel Documentation](https://docs.microsoft.com/en-us/azure/sentinel/)
+- [Automation Rules Guide](https://docs.microsoft.com/en-us/azure/sentinel/automate-incident-handling-with-automation-rules)
+- [Content Hub Solutions](https://docs.microsoft.com/en-us/azure/sentinel/sentinel-solutions)
+- [Data Connectors Reference](https://docs.microsoft.com/en-us/azure/sentinel/connect-data-sources)
+
+---
+
+## 🆘 Support
+
+For issues and questions:
+- Create an [issue](https://github.com/JudeMagayon/Azure-Sentinel/issues)
+- Check [Azure Sentinel documentation](https://docs.microsoft.com/en-us/azure/sentinel/)
+- Contact Secon Cyber support team
+
+---
+
+## 📁 Repository Structure
+
+```
+Azure Sentinel V2/
+├── azuredeploy.json              # Full Sentinel deployment
+├── azuredeploy.parameters.json   # Parameter template
+├── automationrule.json           # Standalone automation rule
+├── createUiDefinition.json       # Azure portal UI definition
+└── README.md                     # This file
+```

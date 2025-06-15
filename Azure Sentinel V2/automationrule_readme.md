@@ -4,9 +4,9 @@ This template deploys a Microsoft Sentinel workspace with an automation rule tha
 
 ## Quick Deploy
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FYOUR-USERNAME%2FYOUR-REPO%2Fmain%2Fazuredeploy.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2Fmain%2FAzure%2520Sentinel%2520V2%2Fautomationrule.json)
 
-[![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FYOUR-USERNAME%2FYOUR-REPO%2Fmain%2Fazuredeploy.json)
+[![Visualize](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/visualizebutton.svg?sanitize=true)](http://armviz.io/#/?load=https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2Fmain%2FAzure%2520Sentinel%2520V2%2Fautomationrule.json)
 
 ## What gets deployed
 
@@ -48,7 +48,7 @@ az group create --name "rg-sentinel-automation" --location "southeastasia"
 # Deploy template
 az deployment group create \
   --resource-group "rg-sentinel-automation" \
-  --template-file "azuredeploy.json" \
+  --template-file "Azure Sentinel V2/automationrule.json" \
   --parameters workspaceName="your-workspace-name"
 ```
 
@@ -61,7 +61,7 @@ New-AzResourceGroup -Name "rg-sentinel-automation" -Location "Southeast Asia"
 # Deploy template
 New-AzResourceGroupDeployment `
   -ResourceGroupName "rg-sentinel-automation" `
-  -TemplateFile "azuredeploy.json" `
+  -TemplateFile "Azure Sentinel V2/automationrule.json" `
   -workspaceName "your-workspace-name"
 ```
 
@@ -122,9 +122,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Support
 
 For issues and questions:
-- Create an [issue](https://github.com/YOUR-USERNAME/YOUR-REPO/issues)
+- Create an [issue](https://github.com/JudeMagayon/Azure-Sentinel/issues)
 - Check Azure Sentinel [documentation](https://docs.microsoft.com/en-us/azure/sentinel/)
 
 ---
 
-**Note**: Replace `YOUR-USERNAME` and `YOUR-REPO` with your actual GitHub username and repository name in the deploy button URLs.
+**Note**: This template is located in the `Azure Sentinel V2` folder of the repository.

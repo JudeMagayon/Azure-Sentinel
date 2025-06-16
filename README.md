@@ -2,7 +2,7 @@
 
 This repository contains automated deployment templates and configurations for onboarding Azure Sentinel (Microsoft Sentinel) in your environment.
 
-## 📋 Overview
+## Overview
 
 This workflow provides a comprehensive solution for deploying and configuring Azure Sentinel with:
 - Automated ARM template deployment
@@ -12,7 +12,7 @@ This workflow provides a comprehensive solution for deploying and configuring Az
 - Watchlist management
 - Custom connectors and data sources
 
-## 🏗️ Repository Structure
+## Repository Structure
 
 ```
 AZURE-SENTINEL/
@@ -35,7 +35,7 @@ AZURE-SENTINEL/
 └── Azure Sentinel IAC/        # Infrastructure as Code templates
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -155,7 +155,7 @@ Pre-built hunting queries are available in the `Hunting Queries/` folder, organi
 - Threat categories
 - Difficulty levels
 
-## 🛡️ Security Considerations
+## Security Considerations
 
 - Review all templates before deployment
 - Ensure proper RBAC configurations
@@ -163,13 +163,13 @@ Pre-built hunting queries are available in the `Hunting Queries/` folder, organi
 - Configure appropriate alert thresholds
 - Regular review of automation rules
 
-## 📖 Documentation
+## Documentation
 
 - `automationrule_readme.md` - Detailed automation rules documentation
 - `createUiDefinition.json` - Portal deployment UI reference
 - Individual component READMEs in respective folders
 
-## 🔄 Maintenance
+## Maintenance
 
 ### Regular Tasks
 - Update analytics rules monthly
@@ -184,7 +184,7 @@ Pre-built hunting queries are available in the `Hunting Queries/` folder, organi
 - Review automation rule execution logs
 - Validate hunting query performance
 
-## 🆘 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 1. **Deployment Failures**: Check ARM template parameters and permissions
@@ -198,21 +198,21 @@ Pre-built hunting queries are available in the `Hunting Queries/` folder, organi
 - Microsoft Security blog
 - Azure support tickets for critical issues
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create feature branch
 3. Test changes in non-production environment
 4. Submit pull request with detailed description
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🏷️ Tags
+##  Tags
 
 `azure-sentinel` `security` `siem` `arm-templates` `automation` `threat-hunting` `incident-response`
 
 ---
 
-**⚠️ Important**: Always test deployments in a non-production environment first. Review all configurations for your specific security requirements before deploying to production.
+**⚠ Important**: Always test deployments in a non-production environment first. Review all configurations for your specific security requirements before deploying to production.

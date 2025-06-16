@@ -1,0 +1,78 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "workspaceName": {
+      "type": "string"
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "southeastasia"
+    },
+    "automationRuleName": {
+      "type": "string",
+      "defaultValue": "AutoCloseNoisyIncidents"
+    },
+    "contentHubSolutionName": {
+      "type": "string",
+      "defaultValue": "WindowsSecurityEvents"
+    }
+  },
+  "resources": [
+    {
+      "type": "Microsoft.OperationalInsights/workspaces",
+      "apiVersion": "2021-06-01",
+      "name": "[parameters('workspaceName')]",
+      "location": "[parameters('location')]",
+      "properties": {}
+    },
+    {
+      "type": "Microsoft.SecurityInsights/automationRules",
+      "apiVersion": "2022-11-01-preview",
+      "name": "[concat(parameters('workspaceName'), '/', parameters('automationRuleName'))]",
+      "properties": {
+        "displayName": "Auto-Close Noisy Incidents",
+        "order": 1,
+        "triggeringLogic": {
+          "triggersOn": "Incident",
+          "triggersWhen": "Created",
+          "conditions": [
+            {
+              "property": "Incident.Title",
+              "operator": "Contains",
+              "value": "MFA Deny"
+            }
+          ]
+        },
+        "actions": [
+          {
+            "order": 1,
+            "actionType": "ModifyProperties",
+            "actionConfiguration": {
+              "status": "Closed",
+              "classification": "BenignPositive",
+              "classificationComment": "Auto-closed due to noise"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "type": "Microsoft.SecurityInsights/contentProductPackages",
+      "apiVersion": "2022-12-01-preview",
+      "name": "[concat(parameters('workspaceName'), '/', parameters('contentHubSolutionName'))]",
+      "properties": {
+        "kind": "Solution",
+        "sourceId": "[parameters('contentHubSolutionName')]"
+      }
+    },
+    {
+      "type": "Microsoft.SecurityInsights/alertRules",
+      "apiVersion": "2022-11-01-preview",
+      "name": "[concat(parameters('workspaceName'), '/MFA_Deny_Alert')]",
+      "properties": {
+        "enabled": false
+      }
+    }
+  ]
+}

@@ -4,6 +4,8 @@ This repository contains automated deployment templates and configurations for o
 
 ## Overview
 
+![Deployment Workflow](https://github.com/user-attachments/assets/a6c3f882-2b14-4bfc-a10e-53560f41f3f7)
+
 This workflow provides a comprehensive solution for deploying and configuring Azure Sentinel with:
 - Automated ARM template deployment
 - Pre-configured analytics rules and hunting queries

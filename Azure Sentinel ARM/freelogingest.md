@@ -25,7 +25,9 @@ This ARM template deploys Microsoft Sentinel Content Hub solutions for the follo
 
 ## How to Deploy
 
-[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2Fmain%2FAzure%2520Sentinel%2520ARM%2Fsentinel-log-ingestion-template.json)
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FJudeMagayon%2FAzure-Sentinel%2Fmain%2FAzure%20Sentinel%20ARM%2Fsentinel-log-ingestion-template.json)
+
+
 
 ## Prerequisites
 

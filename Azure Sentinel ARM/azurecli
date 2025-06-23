@@ -1,0 +1,4 @@
+
+az sentinel data-connector list --workspace-name Sentinel-0 --resource-group auza_lab_0 --query "[].{Name:name, Kind:kind, Type:type}" --output table
+
+az monitor diagnostic-settings list --resource /subscriptions/[subscription id paste here]
